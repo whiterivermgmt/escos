@@ -16,7 +16,7 @@ const HeaderMenu: React.FC = () => {
 
   return (
     <nav className="hidden lg:flex items-center justify-center relative z-20 h-20 w-full px-4">
-  <div className="flex items-center gap-12 max-w-screen-xl w-full flex-wrap justify-center">
+  <div className="flex items-center gap-12 max-w-7xl w-full flex-wrap justify-center">
     {headerData.map((item, index) => {
       const isActive = pathName === item.href;
       const hasSubmenu =
