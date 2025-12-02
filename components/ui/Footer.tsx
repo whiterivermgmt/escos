@@ -36,7 +36,7 @@ const Footer = () => {
             <Link href="/">
               <motion.div whileHover={{ scale: 1.05, rotate: 2 }} className="cursor-pointer">
                 <Image
-                  src="/logo/radio.jpg"
+                  src="/logo/radio.png"
                   alt="90.1 WBED Logo"
                   width={160}
                   height={80}
