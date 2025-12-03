@@ -9,7 +9,7 @@ const LiveRadio = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.8);
 
-  const streamUrl = "https://23.29.119.99:8089/live.mp3?1764637944759";
+  const streamUrl = "http://23.29.119.99:8089/live.mp3?1764637944759";
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume;

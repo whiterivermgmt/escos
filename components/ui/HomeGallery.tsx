@@ -7,14 +7,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const galleryImages = [
-  "/services/blueprint1.jpg",
-  "/services/machine.jpg",
-  "/services/copy.jpg",
-  "/services/printer.jpg",
-  "/services/graphic.jpg",
-  "/services/repair.jpg",
-  "/services/banner.jpg",
-  "/services/banner1.jpg",
+  "/services/gallery1.jpg",
+  "/services/gallery2.jpg",
+  "/services/gallery3.jpg",
+  "/services/gallery4.jpg",
+  "/services/gallery5.jpg",
+  "/services/gallery6.jpg",
+  "/services/gallery7.jpg",
+  "/services/gallery8.jpg",
 ];
 
 

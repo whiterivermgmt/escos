@@ -20,8 +20,8 @@ const HomeAbout = () => {
             transition={{ duration: 0.8 }}
           >
             <Image
-              src="/locations/image.jpg" // Replace with any image from public/services/
-              alt="About Copy Trolley"
+              src="/locations/home.jpg" 
+              alt="Who We Are"
               width={600}
               height={400}
               className="rounded-xl object-cover w-full h-64 lg:h-80"
@@ -38,10 +38,9 @@ const HomeAbout = () => {
           >
             <h2 className="text-3xl font-bold text-gray-900">Who We Are</h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              Copy Trolley has been proudly serving Bedford, Paoli, and surrounding areas with top-quality printing, design, and shipping services.
-              We combine modern technology with a personal touch to ensure every project exceeds expectations.
+              Fun! 90.1 WBED has been the heartbeat of Bedford, Paoli, and our surrounding communities for over 20 years—bringing music, local voices, and real hometown energy to the airwaves.
             </p>
-            <Link href="/about" className="inline-block mt-4 px-6 py-3 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-700 transition">
+            <Link href="/whoweare" className="inline-block mt-4 px-6 py-3 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-700 transition">
               Learn More
             </Link>
           </motion.div>

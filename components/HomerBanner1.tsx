@@ -34,7 +34,6 @@ const HomeBanner: React.FC = () => {
   const nowPlayingRef = useRef<HTMLDivElement>(null);
   const [tickerWidth, setTickerWidth] = useState(0);
 
-  // Measure Now Playing width
   useEffect(() => {
     const updateWidth = () => {
       if (nowPlayingRef.current) setTickerWidth(nowPlayingRef.current.offsetWidth);
@@ -46,27 +45,27 @@ const HomeBanner: React.FC = () => {
 
   return (
     <section className="w-full relative z-20 -mt-32 md:-mt-40">
-      {/* Banner Image */}
-      <div className="relative w-full max-w-6xl mx-auto h-[15vh] sm:h-[18vh] md:h-[20vh] lg:h-[22vh] overflow-hidden rounded-xl -translate-x-11 sm:translate-x-0">
+      {/* Banner Container */}
+      <div className="relative w-full h-[25vh] sm:h-[28vh] md:h-[20vh] lg:h-[22vh] overflow-hidden rounded-xl">
+        {/* Banner Image */}
         <Image
           src="/logo/banner1.png"
           alt="Sponsor Banner"
           fill
           className="
             object-cover 
-            object-[0_0] 
-            sm:object-[10%_50%] 
-            md:object-[15%_50%] 
-            lg:object-[20%_50%]"
+            sm:object-cover 
+            md:object-contain
+            object-center
+          "
         />
 
-        {/* Overlay wrapper to center text */}
-        <div className="absolute inset-0 flex justify-center">
-  <div className="flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-8 w-auto max-w-[90%]">
-    <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-black drop-shadow-sm">
-      All Your Christmas Favorites Brought To You By:
-    </h2>
-
+        {/* Overlay wrapper */}
+        <div className="absolute inset-0 flex justify-center md:justify-center items-center">
+          <div className="flex flex-col md:items-center items-start text-left md:text-center px-4 sm:px-6 md:px-8 w-full max-w-[90%]">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-black drop-shadow-sm">
+              All Your Christmas Favorites Brought To You By:
+            </h2>
 
             {/* Scrolling Sponsors */}
             <div

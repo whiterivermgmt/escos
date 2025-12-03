@@ -8,6 +8,10 @@ import Locations from "@/components/ui/Locations";
 import HomeGallery from "@/components/ui/HomeGallery";
 import Reviews from "@/components/ui/Reviews";
 import HomerBanner1 from "@/components/HomerBanner1";
+import HomeShow from "@/components/ui/HomeShow";
+import RadioBanner from "@/components/ui/RadioBanner";
+import EventsBanner from "@/components/ui/EventsBanner";
+import Calendar from "@/components/ui/Calender";
 
 const heroImages = [
   "/locations/image.jpg",
@@ -17,14 +21,17 @@ const heroImages = [
 
 const HomePage = () => {
   return (
-    <div className="space-y-16 lg:space-y-24">
+    <div className="space-y-12 lg:space-y-14">
       <HeroBanner />
       <HomerBanner1 />
       <HomeAbout />
       <Locations />
-       <OurServices />
-      <HomeGallery />
+      <RadioBanner />
+            <HomeShow />
+      <EventsBanner />
+      <Calendar />
       <Reviews />
+            <HomeGallery />
     </div>
   );
 };
