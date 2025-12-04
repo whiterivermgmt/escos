@@ -3,10 +3,11 @@
 import React, { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { SiFacebook, SiGoogle, SiYelp } from "react-icons/si";
+import { SiFacebook, SiGoogle, SiInstagram, SiYelp } from "react-icons/si";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { headerData } from "@/Constants/data";
+import { IoIosPhonePortrait } from "react-icons/io";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -44,9 +45,9 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
   };
 
   const socialLinks = [
-    { href: "https://www.facebook.com/p/Copy-Trolley-100063464026096/", icon: <SiFacebook />, name: "Facebook" },
-    { href: "https://www.google.com/search?q=copy+trolley", icon: <SiGoogle />, name: "Google Reviews" },
-    { href: "https://www.yelp.com/biz/copy-trolley-bedford", icon: <SiYelp />, name: "Yelp" },
+    { href: "https://www.facebook.com/shannonanddeb/", icon: <SiFacebook />, name: "Facebook" },
+    { href: "https://www.instagram.com/shannonanddeb/", icon: <SiInstagram />, name: "Instagram" },
+    { href: "/mobileapp", icon: <IoIosPhonePortrait />, name: "Mobile App" },
   ];
 
   if (!isMounted) return null;
