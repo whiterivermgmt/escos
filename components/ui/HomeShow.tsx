@@ -14,15 +14,15 @@ const sections = [
     img: "/escos/gallery/g8.jpg",
     reverse: false,
     buttonText: "Learn More",
-    buttonHref: "/about",
+    buttonHref: "/whatwedo",
   },
   {
     title: "Our Mission",
     text: "We strive to combine traditional wellness methods with modern innovation, ensuring every product is ethically sourced, lab-tested, and crafted to meet the highest standards. Supporting our community and environment is at the core of everything we do.",
     img: "/escos/gallery/g2.jpg",
     reverse: true,
-    buttonText: "Shop Now",
-    buttonHref: "/shop",
+    buttonText: "Questions?",
+    buttonHref: "/faq",
   },
 ];
 
