@@ -7,6 +7,7 @@ import SocialMediaHeader from "@/components/ui/SocialMediaHeader";
 import { Analytics } from '@vercel/analytics/next';
 import HeaderBanner from "@/components/ui/HeaderBanner";
 import LiveRadio from "@/components/ui/LiveRadio";
+import TwentyOnePlus from "@/components/ui/TwentyOnePlus";
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-poppins antialiased`}>
-        
+        <TwentyOnePlus />
       <SocialMediaHeader />
        <Header />
         {children}
