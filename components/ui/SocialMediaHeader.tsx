@@ -15,7 +15,7 @@ const SocialMediaHeader = () => {
   const socials = [
     {
       icon: <SiFacebook size={18} />,
-      href: "https://www.facebook.com/profile.php?id=100063690004065",
+      href: "https://www.facebook.com/p/Escos-Green-61568147739220/",
       label: "Facebook",
       bg: "#1877F2",
     },
