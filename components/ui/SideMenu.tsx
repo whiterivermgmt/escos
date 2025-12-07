@@ -39,7 +39,7 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   const socialLinks = [
     {
-      href: "https://www.facebook.com/profile.php?id=100063690004065",
+      href: "https://www.facebook.com/p/Escos-Green-61568147739220/",
       icon: <SiFacebook />,
       bg: "#1877F2", 
       name: "Facebook",
