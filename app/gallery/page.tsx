@@ -6,26 +6,16 @@ import Image from "next/image";
 import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from "react-icons/io";
 
 const galleryImages = [
-  "/gallery/galery1.jpg",
-  "/gallery/galery2.jpg",
-  "/gallery/galery3.jpg",
-  "/gallery/galery4.jpg",
-  "/gallery/galery5.jpg",
-  "/gallery/galery6.jpg",
-  "/gallery/galery7.jpg",
-  "/gallery/gallery8.jpg",
-  "/gallery/gallery9.jpg",
-  "/gallery/gallery10.jpg",
-  "/gallery/galery11.jpg",
-  "/gallery/galery12.jpg",
-  "/gallery/gallery13.jpg",
-  "/gallery/gallery14.jpg",
-  "/gallery/gallery15.jpg",
-  "/gallery/gallery16.jpg",
-  "/gallery/gallery17.jpg",
-  "/gallery/gallery18.jpg",
-  "/gallery/gallery19.jpg",
-  "/gallery/gallery20.jpg",
+  "/escos/gallery/g1.jpg",
+  "/escos/gallery/g2.jpg",
+  "/escos/gallery/g3.jpg",
+  "/escos/gallery/g4.jpg",
+  "/escos/gallery/g5.jpg",
+  "/escos/gallery/g6.jpg",
+  "/escos/gallery/g7.jpg",
+  "/escos/gallery/g8.jpg",
+  "/escos/gallery/g9.jpg",
+  "/escos/gallery/g10.jpg",
 ];
 
 const GalleryPage = () => {
@@ -47,78 +37,88 @@ const GalleryPage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-white pt-24 px-4 flex flex-col items-center">
-      {/* ↑ added pt-24 to move title down */}
-      <h1 className="text-4xl font-bold mb-8 text-[#57b0c7]">Johnny Junxions Gallery</h1>
+    <main className="min-h-screen bg-gray-50 pt-24 px-4 pb-24 flex flex-col items-center">
+      <h1 className="text-5xl font-bold mb-12 text-green-700">Gallery</h1>
 
-      {/* Gallery Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      {/* Grid Gallery */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
         {galleryImages.map((src, idx) => (
           <motion.div
             key={idx}
-            whileHover={{ scale: 1.05 }}
-            className="cursor-pointer relative overflow-hidden rounded-xl shadow-md border-2 border-transparent hover:border-[#57b0c7] transition"
+            whileHover={{ scale: 1.03 }}
+            className="relative cursor-pointer overflow-hidden rounded-xl shadow-lg"
             onClick={() => openLightbox(idx)}
           >
-            <Image
-              src={src}
-              alt={`Gallery Image ${idx + 1}`}
-              width={300}
-              height={200}
-              className="object-cover w-full h-full"
-            />
+            <div className="relative w-full aspect-4/3">
+              <Image
+                src={src}
+                alt={`Gallery Image ${idx + 1}`}
+                fill
+                className="object-cover rounded-xl"
+              />
+            </div>
+            <motion.div
+              className="absolute inset-0 bg-green-700/25 opacity-0 hover:opacity-100 transition flex items-center justify-center text-white font-semibold text-lg"
+            >
+              View
+            </motion.div>
           </motion.div>
         ))}
       </div>
 
       {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxIndex !== null && (
-          <motion.div
-            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <button
-              className="absolute top-6 right-6 text-[#57b0c7] text-4xl hover:text-white transition"
-              onClick={closeLightbox}
-            >
-              <IoMdClose />
-            </button>
+<AnimatePresence>
+  {lightboxIndex !== null && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {/* Close */}
+      <button
+        className="fixed top-6 right-6 text-green-100 text-4xl hover:text-white transition"
+        onClick={closeLightbox}
+      >
+        <IoMdClose />
+      </button>
 
-            <button
-              className="absolute left-6 text-[#57b0c7] text-4xl hover:text-white transition"
-              onClick={prevImage}
-            >
-              <IoIosArrowBack />
-            </button>
+      {/* Previous */}
+      <button
+        className="fixed left-2 sm:left-6 top-1/2 -translate-y-1/2 text-green-100 text-4xl hover:text-white transition z-50"
+        onClick={prevImage}
+      >
+        <IoIosArrowBack />
+      </button>
 
-            <motion.div
-              key={lightboxIndex}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="max-w-[90%] max-h-[80%]"
-            >
-              <Image
-                src={galleryImages[lightboxIndex]}
-                alt={`Gallery Image ${lightboxIndex + 1}`}
-                width={800}
-                height={600}
-                className="object-contain w-full h-full"
-              />
-            </motion.div>
+      {/* Image */}
+      <motion.div
+        key={lightboxIndex}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center"
+      >
+        <Image
+          src={galleryImages[lightboxIndex]}
+          alt={`Gallery Image ${lightboxIndex + 1}`}
+          width={1200}
+          height={900}
+          className="object-contain w-full h-full rounded-xl"
+        />
+      </motion.div>
 
-            <button
-              className="absolute right-6 text-[#57b0c7] text-4xl hover:text-white transition"
-              onClick={nextImage}
-            >
-              <IoIosArrowForward />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Next */}
+      <button
+        className="fixed right-2 sm:right-6 top-1/2 -translate-y-1/2 text-green-100 text-4xl hover:text-white transition z-50"
+        onClick={nextImage}
+      >
+        <IoIosArrowForward />
+      </button>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </main>
   );
 };

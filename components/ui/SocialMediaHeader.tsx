@@ -1,7 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { SiFacebook, SiGoogle, SiYelp } from "react-icons/si";
+import { motion, AnimatePresence } from "framer-motion";
+
+const messages = [
+  "Open Daily 9AM - 9PM",
+  "Fresh Green Products Available",
+  "Weekly Specials Every Friday",
+  "Visit Us in Bedford, IN",
+];
 
 const SocialMediaHeader = () => {
   const socials = [
@@ -9,29 +17,56 @@ const SocialMediaHeader = () => {
       icon: <SiFacebook size={18} />,
       href: "https://www.facebook.com/profile.php?id=100063690004065",
       label: "Facebook",
+      bg: "#1877F2",
     },
     {
       icon: <SiGoogle size={18} />,
-      href: "https://www.google.com/search?sca_esv=9c3862cfc17cffc5&sxsrf=AE3TifMa8xb2_CI0uYt4QcGNRTgJk6Omcg:1764946093391&q=johnny+junctions&si=AMgyJEuzsz2NflaaWzrzdpjxXXRaJ2hfdMsbe_mSWso6src8szS_kfyWLZmGKDiOKotrhr4CC9dguth3_WrJZHOzfJkwNnzpR653fN5y7hM9zwprjrTitFENJKxqX-22jO1jymUOATWA&sa=X&sqi=2&ved=2ahUKEwiZ2MbH2KaRAxUvATQIHYHhG_wQrrQLegQIHRAA&biw=1920&bih=919&dpr=1",
+      href: "https://www.google.com/search?q=escos+green",
       label: "Google Reviews",
+      bg: "#DB4437",
     },
-  
+    {
+      icon: <SiYelp size={18} />,
+      href: "https://www.yelp.com/biz/escos-green-bedford",
+      label: "Yelp",
+      bg: "#D32323",
+    },
   ];
 
+  const [currentMessage, setCurrentMessage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentMessage((prev) => (prev + 1) % messages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="w-full z-50 backdrop-blur-md">
-      <div className="w-full bg-[#57b0c7] shadow-md">
-        <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-2 px-6 py-2 text-white">
-          
-          {/* Left Side: Schedule + Phone */}
-          <div className="flex flex-col sm:flex-col md:flex-row items-start md:items-center gap-1 md:gap-4 font-semibold text-left">
-            <span>Order Ahead!</span>
-            <a
-              href="tel:+18122770436"
-              className="font-bold underline hover:text-gray-200 transition-colors duration-200"
-            >
-               (812)-277-0436
-            </a>
+    <div className="w-full z-50">
+      <div className="w-full bg-gradient-to-r from-green-700 to-green-500 shadow-md">
+        <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-4 px-6 py-2 text-white">
+
+          {/* Left Side: Banner + Rotating Info */}
+          <div className="flex flex-row items-center gap-3 flex-wrap md:flex-nowrap">
+            <span className="font-bold text-sm md:text-base uppercase tracking-wide">
+              Let's All Go to Escos!
+            </span>
+
+            <div className="relative h-6 overflow-hidden flex items-center">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={currentMessage}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute text-sm md:text-base"
+                >
+                  {messages[currentMessage]}
+                </motion.span>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Right Side: Social Icons */}
@@ -42,17 +77,18 @@ const SocialMediaHeader = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-black transition-colors cursor-pointer p-1 rounded-full"
+                  className="flex items-center justify-center w-8 h-8 rounded-full shadow-md transition-transform transform hover:scale-110"
+                  style={{ backgroundColor: social.bg, color: "white" }}
                 >
                   {social.icon}
                 </a>
-                {/* Tooltip */}
                 <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs bg-white text-black px-3 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
                   {social.label}
                 </span>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </div>

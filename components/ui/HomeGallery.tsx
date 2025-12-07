@@ -5,11 +5,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const galleryImages = [
-  "/gallery/galery2.jpg",
-  "/gallery/gallery15.jpg",
-  "/gallery/gallery16.jpg",
-  "/gallery/gallery17.jpg",
-  "/gallery/gallery18.jpg",
+  "/escos/gallery/g2.jpg",
+  "/escos/gallery/g3.jpg",
+  "/escos/gallery/g4.jpg",
+  "/escos/gallery/g5.jpg",
+  "/escos/gallery/g6.jpg",
+  "/escos/gallery/g7.jpg",
+  "/escos/gallery/g8.jpg",
+  "/escos/gallery/g9.jpg",
+  "/escos/gallery/g10.jpg",
 ];
 
 const EventsGallery = () => {
@@ -68,7 +72,7 @@ const EventsGallery = () => {
         {infiniteImages.map((img, idx) => (
           <motion.div
             key={idx}
-            className="inline-block min-w-[250px] h-48 relative rounded-xl overflow-hidden flex-shrink-0 cursor-pointer"
+            className="inline-block min-w-[250px] h-48 relative rounded-xl overflow-hidden shrink-0 cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
             <Image src={img} alt={`Event ${idx}`} fill className="object-cover" />

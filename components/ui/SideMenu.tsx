@@ -2,7 +2,7 @@
 
 import React, { FC, useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { SiFacebook, SiGoogle, SiInstagram } from "react-icons/si";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -41,12 +41,20 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
     {
       href: "https://www.facebook.com/profile.php?id=100063690004065",
       icon: <SiFacebook />,
+      bg: "#1877F2", 
       name: "Facebook",
     },
     {
-      href: "https://www.google.com/search?q=johnny+junctions",
+      href: "https://www.google.com/search?q=escos+green",
       icon: <SiGoogle />,
+      bg: "#DB4437", 
       name: "Google Reviews",
+    },
+    {
+      href: "https://www.instagram.com/escosgreen",
+      icon: <SiInstagram />,
+      bg: "#C13584", 
+      name: "Instagram",
     },
   ];
 
@@ -70,14 +78,23 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
 
       {/* Sidebar */}
       <motion.div
-        className="fixed top-0 left-0 h-full w-72 z-50 shadow-xl flex flex-col justify-between rounded-r-3xl bg-gray-100"
+        className="fixed top-0 left-0 h-full w-72 z-50 flex flex-col justify-between rounded-r-3xl shadow-xl"
         initial={{ x: "-100%" }}
         animate={{ x: isOpen ? 0 : "-100%" }}
         transition={{ type: "spring", stiffness: 200, damping: 25 }}
+        style={{
+          background: "linear-gradient(180deg, #2f855a 0%, #48bb78 100%)",
+        }}
       >
-        {/* Logo */}
-        <div className="flex justify-center items-center p-6 border-b border-gray-300">
+        {/* Logo + Close Button */}
+        <div className="flex justify-between items-center p-6 border-b border-green-600">
           <Logo />
+          <button
+            onClick={handleClose}
+            className="p-2 rounded-full hover:bg-green-700 cursor-pointer transition-colors"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
         </div>
 
         {/* Menu Items */}
@@ -91,27 +108,17 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
                 {/* Main item */}
                 <div
                   className={`flex justify-between items-center w-full px-5 py-4 text-lg font-bold rounded-2xl cursor-pointer transition-colors duration-200
-                    ${isActive ? "bg-[#57b0c7] text-white" : "text-gray-800"}
-                    hover:bg-[#57b0c7] hover:text-white`}
+                    ${isActive ? "bg-[#f9ac04] text-white" : "text-white"}
+                    hover:bg-[#f9ac04] hover:text-white`}
                   onClick={() =>
                     hasSubmenu ? toggleSubmenu(idx) : handleClose()
                   }
                 >
-                  {hasSubmenu ? (
-                    <span
-                      className={`transition-colors duration-200 ${
-                        isActive ? "text-white" : "text-gray-800"
-                      }`}
-                    >
-                      {item.title}
-                    </span>
-                  ) : (
+                  {hasSubmenu ? <span>{item.title}</span> : (
                     <Link
                       href={item.href}
-                      className={`w-full transition-colors duration-200 ${
-                        isActive ? "text-white" : "text-gray-800"
-                      }`}
                       onClick={handleClose}
+                      className="w-full"
                     >
                       {item.title}
                     </Link>
@@ -119,9 +126,7 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
                   {hasSubmenu && (
                     <ChevronDown
                       className={`w-5 h-5 transition-transform duration-200 ${
-                        openIndex === idx || isActive
-                          ? "rotate-180 text-white"
-                          : "text-gray-800"
+                        openIndex === idx || isActive ? "rotate-180 text-white" : "text-white"
                       }`}
                     />
                   )}
@@ -145,12 +150,8 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
                             href={sub.href}
                             onClick={handleClose}
                             className={`px-4 py-2 rounded-xl text-base font-semibold transition-colors duration-200
-                              ${
-                                isSubActive
-                                  ? "bg-[#57b0c7] text-white"
-                                  : "text-gray-800"
-                              }
-                              hover:bg-[#57b0c7] hover:text-white`}
+                              ${isSubActive ? "bg-[#f9ac04] text-white" : "text-white"}
+                              hover:bg-[#f9ac04] hover:text-white`}
                           >
                             {sub.title}
                           </Link>
@@ -172,7 +173,8 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-[#57b0c7] text-white shadow-md hover:bg-[#57b0c7] hover:text-white transition-colors duration-200"
+                className="flex items-center justify-center w-12 h-12 rounded-full shadow-md hover:opacity-90 transition-opacity"
+                style={{ backgroundColor: item.bg, color: "white" }}
               >
                 {React.cloneElement(item.icon, { className: "w-6 h-6" })}
               </a>

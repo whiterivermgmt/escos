@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Event = {
   date: number; // day of month
@@ -66,14 +67,19 @@ const Calendar: React.FC<{ month?: number; year?: number }> = ({
   const handleCloseModal = () => setSelectedEvent(null);
 
   return (
-    <div className="w-full max-w-[900px] mx-auto p-4">
+    <div className="w-full max-w-3xl mx-auto p-4">
       {/* Month Header */}
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
-        {new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" })}
-      </h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+          {new Date(year, month).toLocaleString("default", {
+            month: "long",
+            year: "numeric",
+          })}
+        </h2>
+      </div>
 
       {/* Days of Week */}
-      <div className="grid grid-cols-7 text-center font-semibold text-sm md:text-base mb-2">
+      <div className="grid grid-cols-7 text-center font-semibold text-sm md:text-base text-gray-700 mb-2">
         {daysOfWeek.map((day) => (
           <div key={day} className="py-2">
             {day}
@@ -82,57 +88,71 @@ const Calendar: React.FC<{ month?: number; year?: number }> = ({
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-2 md:gap-3">
+      <div className="grid grid-cols-7 gap-2">
         {calendarCells.map((day, index) => {
           const dayEvents = events.filter((e) => e.date === day);
+          const isToday =
+            day === new Date().getDate() &&
+            month === new Date().getMonth() &&
+            year === new Date().getFullYear();
+
           return (
-            <div
+            <motion.div
               key={index}
-              className={`h-20 md:h-24 border rounded-lg p-1 md:p-2 flex flex-col justify-start items-start overflow-hidden relative cursor-pointer hover:shadow-lg transition`}
+              whileHover={{ scale: day ? 1.03 : 1 }}
+              className={`h-20 md:h-24 border rounded-lg p-2 flex flex-col justify-start items-center cursor-pointer transition ${
+                isToday ? "border-blue-400" : "border-gray-200"
+              }`}
               onClick={() => dayEvents.length && setSelectedEvent(dayEvents[0])}
             >
-              {day && <span className="font-semibold">{day}</span>}
+              <span className="font-semibold text-gray-900">{day}</span>
 
-              {/* Events */}
-              <div className="mt-1 flex flex-col gap-1 w-full">
+              {/* Event dots */}
+              <div className="flex flex-col mt-1 gap-1">
                 {dayEvents.map((event, i) => (
-                  <div
+                  <span
                     key={i}
-                    className={`text-xs md:text-sm px-1 py-0.5 rounded truncate ${event.color} text-white`}
-                  >
-                    {event.title}
-                  </div>
+                    className={`w-2 h-2 rounded-full ${event.color}`}
+                  />
                 ))}
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
 
       {/* Modal */}
-      {selectedEvent && (
-        <div
-          className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
-          onClick={handleCloseModal}
-        >
-          <div
-            className="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full relative"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {selectedEvent && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleCloseModal}
           >
-            <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 font-bold text-xl"
-              onClick={handleCloseModal}
+            <motion.div
+              className="bg-white rounded-xl shadow-xl p-6 max-w-sm w-full relative"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
             >
-              &times;
-            </button>
-            <h3 className="text-lg font-bold mb-2">{selectedEvent.title}</h3>
-            <p className="text-gray-600 mb-1">
-              <strong>Time:</strong> {selectedEvent.time}
-            </p>
-            <p className="text-gray-700">{selectedEvent.description}</p>
-          </div>
-        </div>
-      )}
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 font-bold text-xl"
+                onClick={handleCloseModal}
+              >
+                &times;
+              </button>
+              <h3 className="text-lg font-bold mb-2">{selectedEvent.title}</h3>
+              <p className="text-gray-600 mb-1">
+                <strong>Time:</strong> {selectedEvent.time}
+              </p>
+              <p className="text-gray-700">{selectedEvent.description}</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -10,10 +10,10 @@ import LiveRadio from "@/components/ui/LiveRadio";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - Johnny Junctions",
-    default: "Johnny Junctions",
+    template: "%s - Escos Green+",
+    default: "Escos Green+",
 },
-description: "The Primitive Porch – Bedford, IN. Amish furniture, rustic & farmhouse decor, gifts, handmade items, and a Christian bookstore."
+description: "Escos Green+ - All your Green needs in Bedford, Indiana. Let's All Go to Escos!"
 };
 
 export default function RootLayout({

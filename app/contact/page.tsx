@@ -1,25 +1,33 @@
 "use client";
 
-import React from "react";
-import { SiFacebook } from "react-icons/si";
+import React, { useState } from "react";
+import { SiFacebook, SiGoogle, SiYelp } from "react-icons/si";
 import { motion } from "framer-motion";
 
 const locations = [
   {
-    address: "385 Hillcrest Way, Bedford, IN 47421",
-    query: "385 Hillcrest Way, Bedford, IN 47421",
+    address: "2700 John Williams Blvd, Bedford, IN 47421",
+    query: "2700 John Williams Blvd, Bedford, IN 47421",
   },
 ];
 
+const messages = [
+  "Open Daily 9AM - 9PM",
+  "Fresh Green Products Available",
+  "Weekly Specials Every Friday",
+  "Visit Us in Bedford, IN",
+];
+
 const ContactPage = () => {
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+
   const openMap = (query: string) => {
     const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
     window.open(url, "_blank");
   };
 
   return (
-    <main className="min-h-screen bg-[#f6f6f6] flex flex-col items-center justify-start pt-24 px-4"> 
-      {/* ↑ Added pt-24 to move title down so it’s not overlapped by logo */}
+    <main className="min-h-screen bg-[#f6f6f6] flex flex-col items-center justify-start pt-24 px-4">
 
       {/* Section Header */}
       <motion.div
@@ -28,9 +36,9 @@ const ContactPage = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-3 text-[#57b0c7]">Get In Touch!</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-3 text-[#2f855a]">Get In Touch!</h1>
         <p className="text-gray-700 max-w-2xl mx-auto">
-          Johnny Junxions – Your local convenience store & quick-serve restaurant. Reach out for questions, catering, or just to say hello!
+          Escos – Your local green products store. Reach out for questions, special orders, or just to say hello!
         </p>
       </motion.div>
 
@@ -41,46 +49,71 @@ const ContactPage = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-2xl font-semibold mb-2 text-[#57b0c7]">Contact Form</h2>
+        <h2 className="text-2xl font-semibold mb-2 text-[#2f855a]">Contact Form</h2>
         <p className="text-gray-600 mb-4">
-          Send us a message for questions, catering requests, or general inquiries. We'll get back to you quickly!
+          Send us a message for questions, orders, or general inquiries. We'll get back to you promptly!
         </p>
 
         <input
           type="text"
           placeholder="Your Name"
-          className="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#57b0c7] transition"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          className="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#f9ac04] transition"
         />
         <input
           type="email"
           placeholder="Your Email"
-          className="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#57b0c7] transition"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          className="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#f9ac04] transition"
         />
         <input
           type="text"
           placeholder="Subject"
-          className="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#57b0c7] transition"
+          value={formData.subject}
+          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+          className="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#f9ac04] transition"
         />
         <textarea
           placeholder="Your Message..."
           rows={5}
-          className="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#57b0c7] transition resize-none"
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          className="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#f9ac04] transition resize-none"
         />
 
+        {/* Social Icons */}
         <div className="flex gap-4 mt-2 justify-center">
           <a
-            href="https://www.facebook.com/johnnyjunxions"
+            href="https://www.facebook.com/escosgreen"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#57b0c7] hover:text-yellow-300 text-2xl transition"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1877F2] text-white shadow-md hover:scale-110 transition-transform"
           >
-            <SiFacebook />
+            <SiFacebook size={18} />
+          </a>
+          <a
+            href="https://www.google.com/search?q=escos+green"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#DB4437] text-white shadow-md hover:scale-110 transition-transform"
+          >
+            <SiGoogle size={18} />
+          </a>
+          <a
+            href="https://www.yelp.com/biz/escos-green-bedford"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#D32323] text-white shadow-md hover:scale-110 transition-transform"
+          >
+            <SiYelp size={18} />
           </a>
         </div>
 
         <button
           type="submit"
-          className="mt-4 px-6 py-3 rounded-xl bg-[#57b0c7] text-white font-bold hover:bg-blue-700 hover:scale-105 transition transform shadow-md"
+          className="mt-4 px-6 py-3 rounded-xl bg-[#f9ac04] text-white font-bold hover:bg-orange-500 hover:scale-105 transition transform shadow-md"
         >
           Send Message
         </button>
@@ -95,14 +128,14 @@ const ContactPage = () => {
       >
         {/* Location */}
         <div className="flex flex-col items-center bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
-          <i className="fa-solid fa-location-dot text-3xl text-[#57b0c7] mb-2"></i>
+          <i className="fa-solid fa-location-dot text-3xl text-[#2f855a] mb-2"></i>
           <h3 className="text-xl font-semibold mb-2">Location</h3>
           <div className="text-gray-600 text-center space-y-1">
             {locations.map((loc, idx) => (
               <p
                 key={idx}
                 onClick={() => openMap(loc.query)}
-                className="cursor-pointer hover:text-[#57b0c7] transition"
+                className="cursor-pointer hover:text-[#2f855a] transition"
               >
                 {loc.address}
               </p>
@@ -112,23 +145,23 @@ const ContactPage = () => {
 
         {/* Email */}
         <div className="flex flex-col items-center bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
-          <i className="fa-solid fa-envelope text-3xl text-[#57b0c7] mb-2"></i>
+          <i className="fa-solid fa-envelope text-3xl text-[#2f855a] mb-2"></i>
           <h3 className="text-xl font-semibold mb-1">Email</h3>
           <a
-            href="mailto:info@johnnyjunxions.com"
-            className="text-gray-600 hover:text-[#57b0c7] transition"
+            href="mailto:info@escosgreen.com"
+            className="text-gray-600 hover:text-[#2f855a] transition"
           >
-            steve@johnnyjunxions.com
+            mgmt@escosgreen.com
           </a>
         </div>
 
         {/* Phone */}
         <div className="flex flex-col items-center bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
-          <i className="fa-solid fa-phone text-3xl text-[#57b0c7] mb-2"></i>
+          <i className="fa-solid fa-phone text-3xl text-[#2f855a] mb-2"></i>
           <h3 className="text-xl font-semibold mb-2">Phone</h3>
           <p className="text-gray-600">
-            <a href="tel:+18122770436" className="hover:text-[#57b0c7] transition">
-              +1 812-277-0436
+            <a href="tel:+18120000000" className="hover:text-[#2f855a] transition">
+              +1 812-000-0000
             </a>
           </p>
         </div>

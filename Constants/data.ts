@@ -20,13 +20,13 @@ export const headerData = [
       { title: "Gallery", href: "/gallery", icon: Image },
       { title: "Contact", href: "/contact", icon: ClipboardList },
       {
-        title: "Events",
-        href: "/events",
+        title: "FAQ",
+        href: "/faq",
         icon: GrArticle,
       },
     ],
   },
 
-  { title: "Menu", href: "/menu", side: "left" },
+  { title: "Events", href: "/events", side: "left" },
 
 ];
